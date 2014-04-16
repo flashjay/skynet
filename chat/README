@@ -1,20 +1,20 @@
 $ lua chat/client.lua
-["AUTH", {"userid": 1, "nickname": "test", "roomid": 1, "token":"TOKEN_STRING"}, "h"]
+["AUTH", {"userid": 1, "username": "test", "roomid": 1, "token":"TOKEN_STRING"}, "h"]
 Request:	1
 Response:	1	["AUTH",{"ret":1},"1397619589"]
-Response:	0	["ROOM",{"ts":1397619520,"user":{"name":"test","id":1},"msg":"testing","type":"history"},"1397619589"]
-["AUTH", {"userid": 1, "nickname": "test", "roomid": 1, "token":"TOKEN_STRING"}, "h"]
+Response:	0	["ROOM",{"roomid":1,"ts":1397619520,"user":{"name":"test","id":1},"msg":"testing","type":"history"},"1397619589"]
+["AUTH", {"userid": 1, "username": "test", "roomid": 1, "token":"TOKEN_STRING"}, "h"]
 Request:	2
 Response:	0	["ERROR",{"msg":"重复认证","code":3},"1397619597"]
 ["ROOM", {"roomid":1, "msg":"testing"}, "h"]
 Request:	3
-Response:	0	["ROOM",{"ts":1397619605,"user":{"name":"test","id":1},"msg":"testing","type":"msg"},"1397619605"]
+Response:	0	["ROOM",{"roomid":1,"ts":1397619605,"user":{"name":"test","id":1},"msg":"testing","type":"msg"},"1397619605"]
 Response:	3	["ROOM",{"ret":1,"type":"ret"},"1397619605"]
 
 ===========================
 
 * 登录认证
- -> ["AUTH", {"userid": 1, "nickname": "test", "roomid": 1, "token":"TOKEN_STRING"}, "h"]
+ -> ["AUTH", {"userid": 1, "username": "test", "roomid": 1, "token":"TOKEN_STRING"}, "h"]
  <- ["AUTH", {"ret":1}, "h"]
 
 * 发消息
@@ -23,10 +23,10 @@ Response:	3	["ROOM",{"ret":1,"type":"ret"},"1397619605"]
 
 * 收消息
  1, 历史消息, 成功登录后会立即收到最新30条聊天记录
- <- ["ROOM", {"type":"history","ts":1397617579,"user":{"name":"test","id":1},"msg":"testing"}, "h"]
+ <- ["ROOM", {"type":"history","roomid":1,"ts":1397617579,"user":{"name":"test","id":1},"msg":"testing"}, "h"]
 
  2, 即时消息
- <- ["ROOM", {"type":"msg","msg":"hello, world","ts":1397616715,"user":{"id":1,"name":"test"}}, "h"]
+ <- ["ROOM", {"type":"msg","roomid":1,"msg":"hello, world","ts":1397616715,"user":{"id":1,"name":"test"}}, "h"]
 
 * 错误处理
  <- ["ERROR",{"msg":"重复认证","code":3},"h"]

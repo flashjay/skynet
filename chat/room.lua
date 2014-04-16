@@ -1,67 +1,51 @@
 local skynet = require "skynet"
 local r = require "response"
-local db = {}
+
+local roomid = ...
+
 local command = {}
-local rooms = {}
 local users = {}
 local history = {} -- 历史消息
 
-function command.REG(userid)
-    if not users[userid] then
-        users[userid] = 1
-    end
-end
-function command.UNREG(userid)
-    if users[userid] then
-        users[userid] = nil
-    end
-end
-function command.ISREG(userid)
-    if users[userid] then
-        return true
-    end
-    return false
-end
-
-function command.JOIN(roomid, userid, fd)
-    if not rooms[roomid] then
-        rooms[roomid] = {}
-        history[roomid] = {}
-    end
-    rooms[roomid][userid] = fd
-    for _, data in ipairs(history[roomid]) do
+function command.JOIN(userid, fd)
+    print(">> room - user joined->", roomid, userid, fd)
+    users[userid] = fd
+    for _, data in ipairs(history) do
         data["type"] = "history"
         r.room(fd, 0, data)
     end
 end
 
-function command.QUIT(roomid, userid)
-    rooms[roomid][userid] = nil
+function command.QUIT(userid)
+    users[userid] = nil
+end
+
+-- 广告、敏感词过滤
+local function badword(msg)
+    return false
 end
 
 function command.SEND(json, user)
-    local roomid = json["roomid"]
-    local room = rooms[roomid]
-    if room then
-        local data = {
-            type = "msg", 
-            msg  = json["msg"], 
-            user = user, 
-            ts   = os.time()
-        }
-        for userid, fd in pairs(room) do
-            r.room(fd, 0, data)
-        end
-        table.insert(history[roomid], data)
-        if #history[roomid] > 60 then
-            for _ in 1, 30 do
-                table.remove(history[roomid], 1)
-            end
-        end
-        return 1
-    else
+    if badword(json["msg"]) then
         return 0
     end
+    local data = {
+        type = "msg",
+        roomid = roomid,
+        msg  = json["msg"],
+        user = user,
+        ts   = os.time()
+    }
+    for userid, fd in pairs(users) do
+        r.room(fd, 0, data)
+    end
+    table.insert(history, data)
+    if #history > 60 then
+        for _ in 1, 30 do
+            table.remove(history, 1)
+        end
+    end
+    return 1
 end
 
 skynet.start(function()
@@ -69,5 +53,4 @@ skynet.start(function()
 		local f = command[string.upper(cmd)]
 		skynet.ret(skynet.pack(f(...)))
 	end)
-	skynet.register "ROOM"
 end)

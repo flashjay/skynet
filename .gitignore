@@ -7,3 +7,4 @@ cservice
 luaclib
 *.so
 *.dSYM
+nohup.out

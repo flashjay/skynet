@@ -1,6 +1,6 @@
 local skynet = require "skynet"
 
-local max_client = 64
+local max_client = 10240
 
 skynet.start(function()
 	print("Server start")
@@ -9,7 +9,7 @@ skynet.start(function()
 	local lualog = skynet.newservice("lualog")
 	local console = skynet.newservice("console")
 	skynet.newservice("debug_console",8888)
-	skynet.newservice("room")
+	skynet.newservice("room_mgr")
 	local watchdog = skynet.newservice("watchdog")
 	skynet.call(watchdog, "lua", "start", {
 		port = 8000,
