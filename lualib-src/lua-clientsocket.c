@@ -88,6 +88,17 @@ lsend(lua_State *L) {
 	return 0;
 }
 
+static int
+lrawsend(lua_State *L) {
+	size_t sz = 0;
+	int fd = luaL_checkinteger(L,1);
+	const char * msg = luaL_checklstring(L, 2, &sz);
+	if (sz >= 0x10000) {
+		return luaL_error(L, "package too long %d (16bit limited)", (int)sz);
+	}
+	block_send(L, fd, (const char *)msg, (int)sz);
+	return 0;
+}
 
 static int
 unpack(lua_State *L, uint8_t *buffer, int sz, int n) {
@@ -242,6 +253,7 @@ luaopen_clientsocket(lua_State *L) {
 		{ "send", lsend },
 		{ "close", lclose },
 		{ "usleep", lusleep },
+		{ "rawsend", lrawsend},
 		{ NULL, NULL },
 	};
 	luaL_newlib(L, l);
