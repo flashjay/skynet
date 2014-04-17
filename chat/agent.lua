@@ -18,8 +18,8 @@ skynet.register_protocol {
 		return jsonpack.unpack(skynet.tostring(msg,sz))
 	end,
 	dispatch = function (_, _, session, args)
-        print(">> args", args)
-        args = json_safe.decode(args)
+        local _args = json_safe.encode(args)
+        print(">> args", _args)
 
         if not args or #args ~= 3 then
             r.error(client_fd, r.ERROR.INVALID_ARGS)
@@ -30,9 +30,17 @@ skynet.register_protocol {
 
         if args[1] == "AUTH" then
             local data = args[2]
-            user.id = tonumber(data["userid"])
+
+            local userid = tonumber(data["userid"])
+            -- 同一个连接禁止同时登录多个账号，但是可以进入多个房间
+            if user.id and user.id ~= userid then
+                r.error(client_fd, r.ERROR.MULTI_USER)
+                return
+            end
+            user.id = userid
             user.name = data["username"]
             roomid = data["roomid"]
+            token = data["token"]
 
             if not roomid or string.len(roomid) > 32 then
                 r.error(client_fd, r.ERROR.INVALID_ROOMID)
@@ -42,6 +50,12 @@ skynet.register_protocol {
                 r.error(client_fd, r.ERROR.DUPLICATE_AUTH)
                 return
             end
+
+            -- 认证检查
+            local a = skynet.call("MONGO_PROXY", "lua", "AUTH", user.id, token)
+            r.auth(client_fd, session, {roomid=roomid, ret=a})
+            if a ~=1 then return end
+
             -- 单点登录
             if not _reg then
                 local ok,reg= pcall(skynet.call, "ROOM_MGR", "lua", "REG", user.id)
@@ -51,9 +65,6 @@ skynet.register_protocol {
                 end
                 _reg = true
             end
-
-            -- 认证检查
-            r.auth(client_fd, session, {roomid=roomid, ret=1})
 
             room = skynet.call("ROOM_MGR", "lua", "GETROOM", roomid)
             rooms[roomid] = room

@@ -13,6 +13,7 @@ M.ERROR = {
     PARAMS_ERROR    = {4, "参数错误"},
     NOT_AUTH        = {5, "未认证"},
     INVALID_ROOMID  = {6, "非法roomid"},
+    MULTI_USER      = {7, "禁止同时登录多个账号"},--可以同时进入多个房间
 }
 
 local function _send(fd, session, v)

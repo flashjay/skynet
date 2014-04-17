@@ -10,6 +10,7 @@ skynet.start(function()
 	local console = skynet.newservice("console")
 	skynet.newservice("debug_console",8888)
 	skynet.newservice("room_mgr")
+	skynet.newservice("mongo_proxy")
 	local watchdog = skynet.newservice("watchdog")
 	skynet.call(watchdog, "lua", "start", {
 		port = 8000,

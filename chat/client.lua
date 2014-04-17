@@ -31,7 +31,7 @@ local session = 0
 
 local function send_request(v)
 	session = session + 1
-	local str = string.format("%d+%s",session, cjson.encode(v))
+	local str = string.format("%d+%s",session, v)
 	socket.send(fd, str)
 	print("Request:", session)
 end
