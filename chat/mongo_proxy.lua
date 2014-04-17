@@ -18,7 +18,6 @@ function command.NEW(userid, sid)
 end
 
 function command.AUTH(userid, sid) -- sid = token
-    -- print(">> mongo auth ->", userid, sid)
     local col = db:getCollection(_cfg.col)
     local row = col:findOne({_id=userid})
     if not row then

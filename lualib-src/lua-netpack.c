@@ -255,6 +255,25 @@ filter_data_(lua_State *L, int fd, uint8_t * buffer, int size) {
 			return 1;
 		}
 		int pack_size = read_size(buffer);
+
+        /* ignore tgw header */
+        if(pack_size == 29799) {/*tg -> 29799 */
+            char _b;
+            int _n = 0;
+            int _i = 1;
+            for(; _i<=size; _i++) {
+                _b = *buffer;
+                buffer+=1;
+                if(_b == '\n') {
+                    ++_n; /* \n -> 10*/
+                }
+                if(_n == 3) break;/* 连续3个\n */
+            }
+            size-=_i;
+            if(size == 0) return 1;
+            return filter_data_(L, fd, buffer, size);
+        }
+
 		buffer+=2;
 		size-=2;
 
