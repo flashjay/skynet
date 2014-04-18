@@ -1,6 +1,10 @@
 ## Build
 
+Install autoconf first for jemalloc
+
 ```
+git clone git@github.com:cloudwu/skynet.git
+cd skynet
 make 'PLATFORM'  # PLATFORM can be linux, macosx, freebsd now
 ```
 
