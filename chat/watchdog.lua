@@ -7,7 +7,7 @@ local gate
 local agent = {}
 
 function SOCKET.open(fd, addr)
-	agent[fd] = skynet.newservice("agent")
+	agent[fd] = skynet.newservice("agent", addr)
 	skynet.call(agent[fd], "lua", "start", gate, fd)
 end
 

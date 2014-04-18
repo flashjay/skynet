@@ -19,7 +19,7 @@ Response:	3	["ROOM",{"ret":1,"type":"ret"},"1397619605"]
 
 * 发消息
  -> ["ROOM", {"roomid":1, "msg":"testing"}, "h"]
- <- ["ROOM", {"type":"ret","ret":1}, "h"]
+ <- ["ROOM", {"type":"ret","roomid":1,"ret":1}, "h"]
 
 * 收消息
  1, 历史消息, 成功登录后会立即收到最新30条聊天记录

@@ -1,9 +1,9 @@
 local skynet = require "skynet"
 local jsonpack = require "jsonpack"
-local json_safe = require "cjson.safe"
 local md5 = require "md5"
 local r = require "response"
 
+local h = skynet.getenv "h" -- hash token
 local _gate
 local _reg = false
 local client_fd
@@ -15,18 +15,25 @@ skynet.register_protocol {
 	name = "client",
 	id = skynet.PTYPE_CLIENT,
 	unpack = function (msg, sz)
-		return jsonpack.unpack(skynet.tostring(msg,sz))
+		return skynet.tostring(msg,sz)
 	end,
-	dispatch = function (_, _, session, args)
-        local _args = json_safe.encode(args)
-        print(">> args", _args)
+	dispatch = function (_, _, pack)
+        session, args = jsonpack.unpack(pack)
 
         if not args or #args ~= 3 then
             r.error(client_fd, r.ERROR.INVALID_ARGS)
             return
         end
 
-        local h = args[3] -- hash
+        if h then
+            local _pack = string.sub(pack,0,-12) .. "]"
+            local sh = string.sub(md5.sumhexa(_pack .. h), -6)
+            if args[3] ~= sh then
+                r.error(client_fd, r.ERROR.INVALID_ARGS)
+                print("[agent] pack->", pack, sh, arg[3])
+                return
+            end
+        end
 
         if args[1] == "AUTH" then
             local data = args[2]
@@ -37,8 +44,6 @@ skynet.register_protocol {
                 r.error(client_fd, r.ERROR.MULTI_USER)
                 return
             end
-            user.id = userid
-            user.name = data["username"]
             roomid = data["roomid"]
             token = data["token"]
 
@@ -52,19 +57,22 @@ skynet.register_protocol {
             end
 
             -- 认证检查
-            local a = skynet.call("MONGO_PROXY", "lua", "AUTH", user.id, token)
+            local a = skynet.call("MONGO_PROXY", "lua", "AUTH", userid, token)
             r.auth(client_fd, session, {roomid=roomid, ret=a})
             if a ~=1 then return end
 
             -- 单点登录
             if not _reg then
-                local ok,reg= pcall(skynet.call, "ROOM_MGR", "lua", "REG", user.id)
+                local ok,reg= pcall(skynet.call, "ROOM_MGR", "lua", "REG", userid)
                 if not reg then
                     r.error(client_fd, r.ERROR.DUPLICATE_LOGIN)
                     return
                 end
                 _reg = true
             end
+
+            user.id = userid
+            user.name = data["username"]
 
             room = skynet.call("ROOM_MGR", "lua", "GETROOM", roomid)
             rooms[roomid] = room
@@ -100,16 +108,9 @@ function CMD.start(gate , fd)
 	client_fd = fd
 	skynet.call(gate, "lua", "forward", fd)
     _gate = gate
-    skynet.timeout(3000, function() -- 30s
-        local login = false
-        for r,u in pairs(rooms) do
-            login = true
-        end
-        if not login then
+    skynet.timeout(3000, function() -- 30s 未登录踢掉
+        if not _reg then
             skynet.call(gate, "lua", "kick", fd)
-        end
-        if _reg and user.id then
-            skynet.call("ROOM_MGR", "lua", "UNREG", user.id)
         end
     end)
 end

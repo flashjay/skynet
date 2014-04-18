@@ -1,8 +1,10 @@
+local skynet = require "skynet"
 local socket = require "socket"
 local jsonpack = require "jsonpack"
 local netpack = require "netpack"
 local md5 = require "md5"
 
+local h = skynet.getenv "h" -- hash token
 local M = {}
 
 M.ERROR = {
@@ -17,8 +19,11 @@ M.ERROR = {
 }
 
 local function _send(fd, session, v)
-    local h = tostring(os.time()) --hash
-    v[3] = h
+    if h then
+        v[3] = string.sub(md5.sumhexa(jsonpack.response(session,v)), -6)
+    else
+        v[3] = string.sub(tostring(os.time()), -6)
+    end
 	socket.write(fd, netpack.pack(jsonpack.response(session,v)))
 end
 
