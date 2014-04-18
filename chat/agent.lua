@@ -88,6 +88,8 @@ skynet.register_protocol {
             else
                 r.error(client_fd, r.ERROR.ROOM_ERROR)
             end
+        elseif args[1] == "HB" then
+            r.heartbeat(client_fd, session)
         else
             r.error(client_fd, r.ERROR.INVALID_COMMAND)
         end

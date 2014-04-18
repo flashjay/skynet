@@ -34,4 +34,8 @@ function M.auth(fd, session, msg)
     _send(fd, session, {"AUTH", msg})
 end
 
+function M.heartbeat(fd, session)
+    _send(fd, session, {"HB", {ts=os.time()}})
+end
+
 return M

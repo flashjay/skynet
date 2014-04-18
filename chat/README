@@ -28,6 +28,10 @@ Response:	3	["ROOM",{"ret":1,"type":"ret"},"1397619605"]
  2, 即时消息
  <- ["ROOM", {"type":"msg","roomid":1,"msg":"hello, world","ts":1397616715,"user":{"id":1,"name":"test"}}, "h"]
 
+* 心跳
+ -> ["HB",{"ts":1397785360},"h"]
+ <- ["HB",{"ts":1397785360},"h"]
+
 * 错误处理
  <- ["ERROR",{"msg":"重复认证","code":3},"h"]
 
