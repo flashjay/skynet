@@ -10,6 +10,9 @@ local client_fd
 local CMD = {}
 local rooms = {}
 local user = {}
+local lastactive = os.time()
+local timeout_login = 3000
+local timeout_active = 6000 -- 无活动(包括hb)则踢掉
 
 skynet.register_protocol {
 	name = "client",
@@ -24,6 +27,8 @@ skynet.register_protocol {
             r.error(client_fd, r.ERROR.INVALID_ARGS)
             return
         end
+
+        lastactive = os.time()
 
         if h then
             local _pack = string.sub(pack,0,-12) .. "]"
@@ -104,14 +109,28 @@ skynet.register_protocol {
 	end
 }
 
+local function _timeout()
+    skynet.timeout(timeout_active, function()
+        if os.time() > lastactive + timeout_active/100 then
+            CMD.exit()
+            if client_fd then
+                skynet.call(_gate, "lua", "kick", client_fd)
+            end
+            return
+        end
+        _timeout()
+    end)
+end
+
 function CMD.start(gate , fd)
 	client_fd = fd
 	skynet.call(gate, "lua", "forward", fd)
     _gate = gate
-    skynet.timeout(3000, function() -- 30s 未登录踢掉
+    skynet.timeout(timeout_login, function() -- 30s 未登录踢掉
         if not _reg then
             skynet.call(gate, "lua", "kick", fd)
         end
+        _timeout()
     end)
 end
 
@@ -120,7 +139,9 @@ function CMD.exit()
         if user.id then
             skynet.call(room, "lua", "QUIT", user.id)
         end
+        rooms[roomid] = nil
     end
+    rooms = {}
     if _reg and user.id then
         skynet.call("ROOM_MGR", "lua", "UNREG", user.id)
     end

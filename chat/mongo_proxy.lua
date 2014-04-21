@@ -34,6 +34,15 @@ end
 
 skynet.start(function()
     local mc = mongo.client(config)
+    if _cfg.username and _cfg.password then
+        local a = mc:auth(_cfg.username, _cfg.password)
+        if not a then
+            print("[mongo] auth failed, quit..")
+            skynet.exit()
+        else
+            print("[mongo] auth ok")
+        end
+    end
     db = mc:getDB(config.db)
 
     command.NEW(1, "TOKEN_STRING")

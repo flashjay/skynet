@@ -11,7 +11,6 @@ function command.JOIN(userid, fd)
     print(">> room - user joined->", roomid, userid, fd)
     users[userid] = fd
     for _, data in ipairs(history) do
-        data["type"] = "history"
         r.room(fd, 0, data)
     end
 end
@@ -39,6 +38,7 @@ function command.SEND(json, user)
     for userid, fd in pairs(users) do
         r.room(fd, 0, data)
     end
+    data["type"] = "history"
     table.insert(history, data)
     if #history > 60 then
         for _ in 1, 30 do
