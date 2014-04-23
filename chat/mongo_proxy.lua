@@ -1,10 +1,17 @@
 local skynet = require "skynet"
 local mongo = require "mongo"
 local json = require "cjson"
-local config = require "config"
+
+local function getconfig(path , pre)
+    assert(path)
+    local env = pre or {}
+    local f = assert(loadfile(path,"t",env))
+    f()
+    return env
+end
 
 local mongo_conf = skynet.getenv "mongo"
-local _cfg = config(mongo_conf)["main"]
+local _cfg = getconfig(mongo_conf)["main"]
 
 local config = {port= _cfg.port, host= _cfg.host, db=_cfg.db}
 
