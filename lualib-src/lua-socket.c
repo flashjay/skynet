@@ -1,5 +1,4 @@
-// include skynet.h first for malloc hook
-#include "skynet.h"
+#include "skynet_malloc.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -38,7 +37,7 @@ lfreepool(lua_State *L) {
 	for (i=0;i<sz;i++) {
 		struct buffer_node *node = &pool[i];
 		if (node->msg) {
-			free(node->msg);
+			skynet_free(node->msg);
 			node->msg = NULL;
 		}
 	}
@@ -143,7 +142,7 @@ return_free_node(lua_State *L, int pool, struct socket_buffer *sb) {
 	lua_rawgeti(L,pool,1);
 	free_node->next = lua_touserdata(L,-1);
 	lua_pop(L,1);
-	free(free_node->msg);
+	skynet_free(free_node->msg);
 	free_node->msg = NULL;
 
 	free_node->sz = 0;
@@ -253,7 +252,7 @@ static int
 ldrop(lua_State *L) {
 	void * msg = lua_touserdata(L,1);
 	luaL_checkinteger(L,2);
-	free(msg);
+	skynet_free(msg);
 	return 0;
 }
 
@@ -324,7 +323,7 @@ static int
 lstr2p(lua_State *L) {
 	size_t sz = 0;
 	const char * str = luaL_checklstring(L,1,&sz);
-	void *ptr = malloc(sz);
+	void *ptr = skynet_malloc(sz);
 	memcpy(ptr, str, sz);
 	lua_pushlightuserdata(L, ptr);
 	lua_pushinteger(L, (int)sz);
@@ -414,7 +413,7 @@ get_buffer(lua_State *L, int *sz) {
 	} else {
 		size_t len = 0;
 		const char * str =  luaL_checklstring(L, 2, &len);
-		buffer = malloc(len);
+		buffer = skynet_malloc(len);
 		memcpy(buffer, str, len);
 		*sz = (int)len;
 	}
@@ -491,7 +490,7 @@ luaopen_socketdriver(lua_State *L) {
 	if (lua == NULL || lua->ctx == NULL) {
 		return luaL_error(L, "Init skynet context first");
 	}
-	assert(lua->L == L);
+	// assert(lua->L == L);
 	lua_pop(L,1);
 
 	lua_pushlightuserdata(L, lua->ctx);

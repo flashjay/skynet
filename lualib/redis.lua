@@ -1,9 +1,6 @@
 local skynet = require "skynet"
 local socket = require "socket"
 local socketchannel = require "socketchannel"
-local config = require "config"
-local redis_conf = skynet.getenv "redis"
-local name = config (redis_conf)
 
 local table = table
 local string = string
@@ -83,15 +80,14 @@ local function redis_login(auth, db)
 	end
 end
 
-function redis.connect(dbname)
-	local db_conf = name[dbname]
+function redis.connect(db_conf)
 	local channel = socketchannel.channel {
 		host = db_conf.host,
 		port = db_conf.port or 6379,
 		auth = redis_login(db_conf.auth, db_conf.db),
 	}
-	-- try connect first
-	channel:connect()
+	-- try connect first only once
+	channel:connect(true)
 	return setmetatable( { channel }, meta )
 end
 
@@ -170,8 +166,7 @@ local function watch_login(obj, auth)
 	end
 end
 
-function redis.watch(dbname)
-	local db_conf = name[dbname]
+function redis.watch(db_conf)
 	local obj = {
 		__subscribe = {},
 		__psubscribe = {},
@@ -183,8 +178,8 @@ function redis.watch(dbname)
 	}
 	obj.__sock = channel
 
-	-- try connect first
-	channel:connect()
+	-- try connect first only once
+	channel:connect(true)
 	return setmetatable( obj, watchmeta )
 end
 

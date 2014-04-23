@@ -6,6 +6,11 @@ local assert = assert
 local pairs = pairs
 local pcall = pcall
 
+local profile = require "profile"
+
+coroutine.resume = profile.resume
+coroutine.yield = profile.yield
+
 local proto = {}
 local skynet = {
 	-- read skynet.h
@@ -316,6 +321,10 @@ function skynet.ret(msg, sz)
 	coroutine_yield("RETURN", msg, sz)
 end
 
+function skynet.retpack(...)
+    return skynet.ret(skynet.pack(...))
+end
+
 function skynet.wakeup(co)
 	if sleep_session[co] and wakeup_session[co] == nil then
 		wakeup_session[co] = true
@@ -327,6 +336,17 @@ function skynet.dispatch(typename, func)
 	local p = assert(proto[typename],tostring(typename))
 	assert(p.dispatch == nil, tostring(typename))
 	p.dispatch = func
+end
+
+local function unknown_request(session, address, msg, sz)
+    print("Unknown request :" , c.tostring(msg,sz))
+	error(string.format("Unknown session : %d from %x", session, address))
+end
+
+function skynet.dispatch_unknown_request(unknown)
+    local prev = unknown_request
+    unknown_request = unknown
+    return prev
 end
 
 local function unknown_response(session, address, msg, sz)
@@ -352,7 +372,7 @@ function skynet.fork(func,...)
 	table.insert(fork_queue, co)
 end
 
-local function raw_dispatch_message(prototype, msg, sz, session, source)
+local function raw_dispatch_message(prototype, msg, sz, session, source, ...)
 	-- skynet.PTYPE_RESPONSE = 1, read skynet.h
 	if prototype == 1 then
 		local co = session_id_coroutine[session]
@@ -371,10 +391,9 @@ local function raw_dispatch_message(prototype, msg, sz, session, source)
 			local co = co_create(f)
 			session_coroutine_id[co] = session
 			session_coroutine_address[co] = source
-			suspend(co, coroutine.resume(co, session,source, p.unpack(msg,sz)))
+			suspend(co, coroutine.resume(co, session,source, p.unpack(msg,sz, ...)))
 		else
-			print("Unknown request :" , p.unpack(msg,sz))
-			error(string.format("Can't dispatch type %s : ", p.name))
+            unknown_request(session, source, msg, sz)
 		end
 	end
 end
@@ -461,6 +480,12 @@ function skynet.error(...)
 end
 
 ----- debug
+
+local internal_info_func
+
+function skynet.info_func(func)
+	internal_info_func = func
+end
 
 local dbgcmd = {}
 
