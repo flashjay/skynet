@@ -10,6 +10,7 @@ local client_fd
 local CMD = {}
 local rooms = {}
 local user = {}
+local lastsession
 local lastactive = os.time()
 local timeout_login = 3000
 local timeout_active = 6000 -- 无活动(包括hb)则踢掉
@@ -32,6 +33,14 @@ skynet.register_protocol {
 
         if h then
             local _pack = string.sub(pack,0,-12) .. "]"
+            if not lastsession then
+                lastsession = session
+            end
+            if lastsession ~= session then
+                r.error(client_fd, r.ERROR.INVALID_ARGS)
+                return
+            end
+            lastsession = lastsession + 1
             local sh = string.sub(md5.sumhexa(_pack .. h), -6)
             if args[3] ~= sh then
                 r.error(client_fd, r.ERROR.INVALID_ARGS)
