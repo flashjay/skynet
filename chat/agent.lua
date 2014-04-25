@@ -58,13 +58,14 @@ skynet.register_protocol {
                 r.error(client_fd, r.ERROR.MULTI_USER)
                 return
             end
-            roomid = data["roomid"]
             token = data["token"]
 
+            roomid = data["roomid"]
             if not roomid or string.len(roomid) > 32 then
                 r.error(client_fd, r.ERROR.INVALID_ROOMID)
                 return
             end
+            roomid = string.gsub(data["roomid"], "%s", "")
             if rooms[roomid] then
                 r.error(client_fd, r.ERROR.DUPLICATE_AUTH)
                 return
