@@ -10,8 +10,8 @@ local client_fd
 local CMD = {}
 local rooms = {}
 local user = {}
-local lastsession
-local lastactive = os.time()
+local last_session
+local last_active = os.time()
 local timeout_login = 3000
 local timeout_active = 6000 -- 无活动(包括hb)则踢掉
 
@@ -22,25 +22,25 @@ skynet.register_protocol {
 		return skynet.tostring(msg,sz)
 	end,
 	dispatch = function (_, _, pack)
-        session, args = jsonpack.unpack(pack)
+        local session, args = jsonpack.unpack(pack)
 
         if not args or #args ~= 3 then
             r.error(client_fd, r.ERROR.INVALID_ARGS)
             return
         end
 
-        lastactive = os.time()
+        last_active = os.time()
 
         if h then
             local _pack = string.sub(pack,0,-12) .. "]"
-            if not lastsession then
-                lastsession = session
+            if not last_session then
+                last_session = session
             end
-            if lastsession ~= session then
+            if last_session ~= session then
                 r.error(client_fd, r.ERROR.INVALID_ARGS)
                 return
             end
-            lastsession = lastsession + 1
+            last_session = last_session + 1
             local sh = string.sub(md5.sumhexa(_pack .. h), -6)
             if args[3] ~= sh then
                 r.error(client_fd, r.ERROR.INVALID_ARGS)
@@ -58,9 +58,9 @@ skynet.register_protocol {
                 r.error(client_fd, r.ERROR.MULTI_USER)
                 return
             end
-            token = data["token"]
+            local token = data["token"]
 
-            roomid = data["roomid"]
+            local roomid = data["roomid"]
             if not roomid or string.len(roomid) > 32 then
                 r.error(client_fd, r.ERROR.INVALID_ROOMID)
                 return
@@ -89,23 +89,23 @@ skynet.register_protocol {
             user.id = userid
             user.name = data["username"]
 
-            room = skynet.call("ROOM_MGR", "lua", "GETROOM", roomid)
+            local room = skynet.call("ROOM_MGR", "lua", "GETROOM", roomid)
             rooms[roomid] = room
             skynet.call(room, "lua", "JOIN", user.id, client_fd)
 
         elseif args[1] == "ROOM" then
-            local msg = args[2]
-            roomid = msg["roomid"]
+            --local msg = args[2]
+            local roomid =  args[2]["roomid"]
             if not roomid then
                 r.error(client_fd, r.ERROR.PARAMS_ERROR)
                 return
             end
+            roomid = tostring(roomid)
             if not rooms[roomid] then
                 r.error(client_fd, r.ERROR.NOT_AUTH)
                 return
             end
-            room = rooms[roomid]
-            local ok, result = pcall(skynet.call, room, "lua", "SEND", msg, user)
+            local ok, result = pcall(skynet.call, rooms[roomid], "lua", "SEND",  args[2], user)
             if ok then
                 r.room(client_fd, session, {type="ret", roomid=roomid, ret=result})
             else
@@ -121,7 +121,7 @@ skynet.register_protocol {
 
 local function _timeout()
     skynet.timeout(timeout_active, function()
-        if os.time() > lastactive + timeout_active/100 then
+        if os.time() > last_active + timeout_active/100 then
             CMD.exit()
             if client_fd then
                 skynet.call(_gate, "lua", "kick", client_fd)

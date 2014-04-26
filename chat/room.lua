@@ -10,8 +10,9 @@ local history = {} -- 历史消息
 function command.JOIN(userid, fd)
     print(">> room - user joined->", roomid, userid, fd)
     users[userid] = fd
-    for _, data in ipairs(history) do
+    for id, data in ipairs(history) do
         r.room(fd, 0, data)
+        if id >= 30 then return end
     end
 end
 
@@ -41,7 +42,7 @@ function command.SEND(json, user)
     data["type"] = "history"
     table.insert(history, data)
     if #history > 60 then
-        for _ in 1, 30 do
+        for _=1,30 do
             table.remove(history, 1)
         end
     end
