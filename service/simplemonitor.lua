@@ -16,7 +16,7 @@ skynet.register_protocol {
 			end
 			service_map[address] = false
 		end
-		print(string.format("[:%x] exit", address))
+		print(string.format("[:%x] exit {simplemonitor.lua}", address))
 	end
 }
 

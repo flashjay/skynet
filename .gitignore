@@ -8,3 +8,4 @@ luaclib
 *.so
 *.dSYM
 nohup.out
+tags
