@@ -52,7 +52,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		D6D0F55A1910D52C00E8C2DD /* skynet */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = skynet; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6D0F55A1910D52C00E8C2DD /* skynet */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = skynet; path = "/Users/faryang/work/projects/pirate/skynet-chat/proj.mac/../skynet"; sourceTree = "<absolute>"; };
 		D6D0F7081910D57A00E8C2DD /* lua-bson.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "lua-bson.c"; sourceTree = "<group>"; };
 		D6D0F7091910D57A00E8C2DD /* lua-clientsocket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "lua-clientsocket.c"; sourceTree = "<group>"; };
 		D6D0F70A1910D57A00E8C2DD /* lua-memory.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "lua-memory.c"; sourceTree = "<group>"; };
@@ -108,6 +108,8 @@
 		D6D0F81F1910DBBA00E8C2DD /* lualib */ = {isa = PBXFileReference; lastKnownFileType = folder; path = lualib; sourceTree = "<group>"; };
 		D6D0F8201910DBBA00E8C2DD /* service */ = {isa = PBXFileReference; lastKnownFileType = folder; path = service; sourceTree = "<group>"; };
 		D6D0F8211910DBBA00E8C2DD /* test */ = {isa = PBXFileReference; lastKnownFileType = folder; path = test; sourceTree = "<group>"; };
+		D6D0F84D191100FC00E8C2DD /* chat */ = {isa = PBXFileReference; lastKnownFileType = folder; path = chat; sourceTree = "<group>"; };
+		D6D0F84E1911029C00E8C2DD /* skynet */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = skynet; path = ../skynet; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,21 +129,14 @@
 			children = (
 				D6D0F5641910D57900E8C2DD /* src */,
 				D6D0F81D1910DAF700E8C2DD /* libs */,
-				D6D0F55B1910D52C00E8C2DD /* Products */,
+				D6D0F84F191102B000E8C2DD /* bin */,
 			);
-			sourceTree = "<group>";
-		};
-		D6D0F55B1910D52C00E8C2DD /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				D6D0F55A1910D52C00E8C2DD /* skynet */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		D6D0F5641910D57900E8C2DD /* src */ = {
 			isa = PBXGroup;
 			children = (
+				D6D0F84D191100FC00E8C2DD /* chat */,
 				D6D0F81E1910DBBA00E8C2DD /* examples */,
 				D6D0F81F1910DBBA00E8C2DD /* lualib */,
 				D6D0F8201910DBBA00E8C2DD /* service */,
@@ -233,6 +228,14 @@
 			name = libs;
 			sourceTree = "<group>";
 		};
+		D6D0F84F191102B000E8C2DD /* bin */ = {
+			isa = PBXGroup;
+			children = (
+				D6D0F84E1911029C00E8C2DD /* skynet */,
+			);
+			name = bin;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -269,7 +272,7 @@
 				en,
 			);
 			mainGroup = D6D0F54F1910D4B200E8C2DD;
-			productRefGroup = D6D0F55B1910D52C00E8C2DD /* Products */;
+			productRefGroup = D6D0F54F1910D4B200E8C2DD;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
