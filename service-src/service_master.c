@@ -201,6 +201,9 @@ _update_address(struct master *m, int harbor_id, const char * buffer, size_t sz)
 	memcpy(addr, buffer, sz);
 	addr[sz] = '\0';
 	m->remote_addr[harbor_id] = addr;
+    /**#
+     * Master connect to harbor
+     */
 	_connect_to(m, harbor_id);
 }
 
@@ -279,6 +282,11 @@ _mainloop(struct skynet_context * context, void * ud, int type, int session, uin
 	if (handle == 0) {
 		_request_name(m , name, sz);
 	} else if (handle < REMOTE_MAX) {
+        /**#
+         * request by service_harbor.c->_request_master thru tcp
+         * ...........127.0.0.1:2526
+         * then, master use this harbor addr, connect to harbor
+         */
 		_update_address(m , handle, name, sz);
 	} else {
 		_update_name(m , handle, name, sz);

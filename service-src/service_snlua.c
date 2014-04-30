@@ -236,6 +236,13 @@ static int
 _launch(struct skynet_context * context, void *ud, int type, int session, uint32_t source , const void * msg, size_t sz) {
 	assert(type == 0 && session == 0);
 	struct snlua *l = ud;
+    /**#
+     * callback params will replaced by lua-skynet.c _cb later
+     * skynet.start()
+     *  ->c.callback(dispatch_message)
+     *   ->lua-skynet.c->_callback
+     *    ->skynet_callback(context, gL, _cb)
+     */
 	skynet_callback(context, NULL, NULL);
 	struct timespec ti;
 	current_time(&ti);
