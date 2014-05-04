@@ -1,0 +1,1 @@
+cc -g -Wall -fPIC -dynamiclib -Wl,-undefined,dynamic_lookup -o protobuf.so -I /usr/include/malloc/ -I../.. -L../../build pbc-lua.c -lpbc -I /usr/local/lua/5.2/include/

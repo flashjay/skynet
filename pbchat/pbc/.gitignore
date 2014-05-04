@@ -1,0 +1,11 @@
+*.suo
+*.sdf
+*.opensdf
+*.d
+*.o
+Debug
+Release
+build
+.DS_Store
+pbc.xcodeproj/project.xcworkspace/xcuserdata/*
+pbc.xcodeproj/xcuserdata/*

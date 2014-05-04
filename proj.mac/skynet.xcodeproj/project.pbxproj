@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D65B6F5D191693DF009A52D7 /* client.c in Sources */ = {isa = PBXBuildFile; fileRef = D65B6EE1191693DF009A52D7 /* client.c */; };
+		D6BFAA22191617FD00463EFF /* libpbc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D6BFAA0F1916174500463EFF /* libpbc.a */; };
 		D6D0F7FC1910D57A00E8C2DD /* lua-bson.c in Sources */ = {isa = PBXBuildFile; fileRef = D6D0F7081910D57A00E8C2DD /* lua-bson.c */; };
 		D6D0F7FD1910D57A00E8C2DD /* lua-clientsocket.c in Sources */ = {isa = PBXBuildFile; fileRef = D6D0F7091910D57A00E8C2DD /* lua-clientsocket.c */; };
 		D6D0F7FE1910D57A00E8C2DD /* lua-memory.c in Sources */ = {isa = PBXBuildFile; fileRef = D6D0F70A1910D57A00E8C2DD /* lua-memory.c */; };
@@ -39,6 +41,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		D66C33B119166ABF00F8294B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D6D0F5501910D4B200E8C2DD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D66C33AD1916455700F8294B;
+			remoteInfo = protobuf.so;
+		};
+		D6BFAA0E1916174500463EFF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D6BFAA0A1916174500463EFF /* pbc.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D7EF1334179E5530002B6A46;
+			remoteInfo = pbc;
+		};
 		D6D0F85A19111EA300E8C2DD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D6D0F5501910D4B200E8C2DD /* Project object */;
@@ -49,6 +65,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		D6BFAA12191617A500463EFF /* Copy Files */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			name = "Copy Files";
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		D6D0F5581910D52C00E8C2DD /* Copy Files */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 8;
@@ -63,6 +89,25 @@
 
 /* Begin PBXFileReference section */
 		D62E4BAD1911239A001FC7C9 /* skynet */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = skynet; sourceTree = BUILT_PRODUCTS_DIR; };
+		D65B6EDE191693DF009A52D7 /* chat.pb */ = {isa = PBXFileReference; lastKnownFileType = file; path = chat.pb; sourceTree = "<group>"; };
+		D65B6EDF191693DF009A52D7 /* chat.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chat.proto; sourceTree = "<group>"; };
+		D65B6EE1191693DF009A52D7 /* client.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = client.c; sourceTree = "<group>"; };
+		D65B6EE2191693DF009A52D7 /* config */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = config; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.lua; };
+		D65B6EE4191693DF009A52D7 /* agent.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = agent.lua; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.lua; };
+		D65B6EE5191693DF009A52D7 /* client.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = client.lua; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.lua; };
+		D65B6EE6191693DF009A52D7 /* globallog.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = globallog.lua; sourceTree = "<group>"; };
+		D65B6EE7191693DF009A52D7 /* lualog.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lualog.lua; sourceTree = "<group>"; };
+		D65B6EE8191693DF009A52D7 /* main.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.lua; sourceTree = "<group>"; };
+		D65B6EE9191693DF009A52D7 /* main_log.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main_log.lua; sourceTree = "<group>"; };
+		D65B6EEA191693DF009A52D7 /* mongo_proxy.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mongo_proxy.lua; sourceTree = "<group>"; };
+		D65B6EEB191693DF009A52D7 /* protobuf.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = protobuf.lua; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.lua; };
+		D65B6EEC191693DF009A52D7 /* response.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = response.lua; sourceTree = "<group>"; };
+		D65B6EED191693DF009A52D7 /* room.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = room.lua; sourceTree = "<group>"; };
+		D65B6EEE191693DF009A52D7 /* room_mgr.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = room_mgr.lua; sourceTree = "<group>"; };
+		D65B6EEF191693DF009A52D7 /* watchdog.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = watchdog.lua; sourceTree = "<group>"; };
+		D65B6EF0191693DF009A52D7 /* mongoconf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mongoconf; sourceTree = "<group>"; };
+		D6BFAA0A1916174500463EFF /* pbc.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = pbc.xcodeproj; path = ../pbchat/pbc/pbc.xcodeproj; sourceTree = "<group>"; };
+		D6BFAA14191617A500463EFF /* pbclient */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = pbclient; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6D0F7081910D57A00E8C2DD /* lua-bson.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "lua-bson.c"; sourceTree = "<group>"; };
 		D6D0F7091910D57A00E8C2DD /* lua-clientsocket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "lua-clientsocket.c"; sourceTree = "<group>"; };
 		D6D0F70A1910D57A00E8C2DD /* lua-memory.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "lua-memory.c"; sourceTree = "<group>"; };
@@ -121,6 +166,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D6BFAA11191617A500463EFF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D6BFAA22191617FD00463EFF /* libpbc.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D6D0F5571910D52C00E8C2DD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -132,12 +185,64 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D65B6EDC191693DF009A52D7 /* pbchat */ = {
+			isa = PBXGroup;
+			children = (
+				D65B6EDE191693DF009A52D7 /* chat.pb */,
+				D65B6EDF191693DF009A52D7 /* chat.proto */,
+				D65B6EE0191693DF009A52D7 /* client */,
+				D65B6EE2191693DF009A52D7 /* config */,
+				D65B6EE3191693DF009A52D7 /* lua */,
+				D65B6EF0191693DF009A52D7 /* mongoconf */,
+			);
+			name = pbchat;
+			path = ../pbchat;
+			sourceTree = "<group>";
+		};
+		D65B6EE0191693DF009A52D7 /* client */ = {
+			isa = PBXGroup;
+			children = (
+				D65B6EE1191693DF009A52D7 /* client.c */,
+			);
+			path = client;
+			sourceTree = "<group>";
+		};
+		D65B6EE3191693DF009A52D7 /* lua */ = {
+			isa = PBXGroup;
+			children = (
+				D65B6EE4191693DF009A52D7 /* agent.lua */,
+				D65B6EE5191693DF009A52D7 /* client.lua */,
+				D65B6EE6191693DF009A52D7 /* globallog.lua */,
+				D65B6EE7191693DF009A52D7 /* lualog.lua */,
+				D65B6EE8191693DF009A52D7 /* main.lua */,
+				D65B6EE9191693DF009A52D7 /* main_log.lua */,
+				D65B6EEA191693DF009A52D7 /* mongo_proxy.lua */,
+				D65B6EEB191693DF009A52D7 /* protobuf.lua */,
+				D65B6EEC191693DF009A52D7 /* response.lua */,
+				D65B6EED191693DF009A52D7 /* room.lua */,
+				D65B6EEE191693DF009A52D7 /* room_mgr.lua */,
+				D65B6EEF191693DF009A52D7 /* watchdog.lua */,
+			);
+			path = lua;
+			sourceTree = "<group>";
+		};
+		D6BFAA0B1916174500463EFF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D6BFAA0F1916174500463EFF /* libpbc.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		D6D0F54F1910D4B200E8C2DD = {
 			isa = PBXGroup;
 			children = (
+				D6BFAA0A1916174500463EFF /* pbc.xcodeproj */,
 				D6D0F5641910D57900E8C2DD /* src */,
 				D6D0F81D1910DAF700E8C2DD /* libs */,
+				D65B6EDC191693DF009A52D7 /* pbchat */,
 				D62E4BAD1911239A001FC7C9 /* skynet */,
+				D6BFAA14191617A500463EFF /* pbclient */,
 			);
 			sourceTree = "<group>";
 		};
@@ -238,23 +343,55 @@
 /* End PBXGroup section */
 
 /* Begin PBXLegacyTarget section */
-		D6D0F85619111E8F00E8C2DD /* build.so */ = {
+		D66C33AD1916455700F8294B /* protobuf.so */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = D66C33AE1916455700F8294B /* Build configuration list for PBXLegacyTarget "protobuf.so" */;
+			buildPhases = (
+			);
+			buildToolPath = /usr/bin/make;
+			buildWorkingDirectory = ../pbchat/pbc/binding/lua;
+			dependencies = (
+			);
+			name = protobuf.so;
+			passBuildSettingsInEnvironment = 1;
+			productName = protobuf.so;
+		};
+		D6D0F85619111E8F00E8C2DD /* skynet.so */ = {
 			isa = PBXLegacyTarget;
 			buildArgumentsString = "$(ACTION) macosx";
-			buildConfigurationList = D6D0F85719111E8F00E8C2DD /* Build configuration list for PBXLegacyTarget "build.so" */;
+			buildConfigurationList = D6D0F85719111E8F00E8C2DD /* Build configuration list for PBXLegacyTarget "skynet.so" */;
 			buildPhases = (
 			);
 			buildToolPath = /usr/bin/make;
 			buildWorkingDirectory = ../;
 			dependencies = (
 			);
-			name = build.so;
+			name = skynet.so;
 			passBuildSettingsInEnvironment = 1;
 			productName = "build-so";
 		};
 /* End PBXLegacyTarget section */
 
 /* Begin PBXNativeTarget section */
+		D6BFAA13191617A500463EFF /* pbclient */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D6BFAA1A191617A500463EFF /* Build configuration list for PBXNativeTarget "pbclient" */;
+			buildPhases = (
+				D6BFAA10191617A500463EFF /* Sources */,
+				D6BFAA11191617A500463EFF /* Frameworks */,
+				D6BFAA12191617A500463EFF /* Copy Files */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D66C33B219166ABF00F8294B /* PBXTargetDependency */,
+			);
+			name = pbclient;
+			productName = pbclient;
+			productReference = D6BFAA14191617A500463EFF /* pbclient */;
+			productType = "com.apple.product-type.tool";
+		};
 		D6D0F5591910D52C00E8C2DD /* skynet */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D6D0F5631910D52C00E8C2DD /* Build configuration list for PBXNativeTarget "skynet" */;
@@ -291,15 +428,41 @@
 			mainGroup = D6D0F54F1910D4B200E8C2DD;
 			productRefGroup = D6D0F54F1910D4B200E8C2DD;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = D6BFAA0B1916174500463EFF /* Products */;
+					ProjectRef = D6BFAA0A1916174500463EFF /* pbc.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				D6D0F5591910D52C00E8C2DD /* skynet */,
-				D6D0F85619111E8F00E8C2DD /* build.so */,
+				D6D0F85619111E8F00E8C2DD /* skynet.so */,
+				D6BFAA13191617A500463EFF /* pbclient */,
+				D66C33AD1916455700F8294B /* protobuf.so */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		D6BFAA0F1916174500463EFF /* libpbc.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libpbc.a;
+			remoteRef = D6BFAA0E1916174500463EFF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXSourcesBuildPhase section */
+		D6BFAA10191617A500463EFF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D65B6F5D191693DF009A52D7 /* client.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D6D0F5561910D52C00E8C2DD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -338,14 +501,183 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		D66C33B219166ABF00F8294B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D66C33AD1916455700F8294B /* protobuf.so */;
+			targetProxy = D66C33B119166ABF00F8294B /* PBXContainerItemProxy */;
+		};
 		D6D0F85B19111EA300E8C2DD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D6D0F85619111E8F00E8C2DD /* build.so */;
+			target = D6D0F85619111E8F00E8C2DD /* skynet.so */;
 			targetProxy = D6D0F85A19111EA300E8C2DD /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		D66C33AF1916455700F8294B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUGGING_SYMBOLS = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		D66C33B01916455700F8294B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		D6BFAA1B191617A500463EFF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CONFIGURATION_BUILD_DIR = ../pbchat/;
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = ../;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = ../pbchat/pbc;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/faryang/work/projects/pirate/skynet-chat/pbchat/pbc/build",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		D6BFAA1C191617A500463EFF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CONFIGURATION_BUILD_DIR = ../pbchat/;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DSTROOT = ../;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = ../pbchat/pbc;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/faryang/work/projects/pirate/skynet-chat/pbchat/pbc/build",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 		D6D0F5541910D4B200E8C2DD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -544,6 +876,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D66C33AE1916455700F8294B /* Build configuration list for PBXLegacyTarget "protobuf.so" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D66C33AF1916455700F8294B /* Debug */,
+				D66C33B01916455700F8294B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D6BFAA1A191617A500463EFF /* Build configuration list for PBXNativeTarget "pbclient" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D6BFAA1B191617A500463EFF /* Debug */,
+				D6BFAA1C191617A500463EFF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D6D0F5531910D4B200E8C2DD /* Build configuration list for PBXProject "skynet" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -562,7 +912,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D6D0F85719111E8F00E8C2DD /* Build configuration list for PBXLegacyTarget "build.so" */ = {
+		D6D0F85719111E8F00E8C2DD /* Build configuration list for PBXLegacyTarget "skynet.so" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D6D0F85819111E8F00E8C2DD /* Debug */,
