@@ -48,6 +48,13 @@
 			remoteGlobalIDString = D66C33AD1916455700F8294B;
 			remoteInfo = protobuf.so;
 		};
+		D6903892192AF2F2008C61FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D6BFAA0A1916174500463EFF /* pbc.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D7EF1333179E5530002B6A46;
+			remoteInfo = pbc;
+		};
 		D6BFAA0E1916174500463EFF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D6BFAA0A1916174500463EFF /* pbc.xcodeproj */;
@@ -385,6 +392,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				D6903893192AF2F2008C61FD /* PBXTargetDependency */,
 				D66C33B219166ABF00F8294B /* PBXTargetDependency */,
 			);
 			name = pbclient;
@@ -505,6 +513,11 @@
 			isa = PBXTargetDependency;
 			target = D66C33AD1916455700F8294B /* protobuf.so */;
 			targetProxy = D66C33B119166ABF00F8294B /* PBXContainerItemProxy */;
+		};
+		D6903893192AF2F2008C61FD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = pbc;
+			targetProxy = D6903892192AF2F2008C61FD /* PBXContainerItemProxy */;
 		};
 		D6D0F85B19111EA300E8C2DD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
